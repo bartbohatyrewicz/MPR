@@ -2,6 +2,7 @@ package proj.mainfiles.fajnyprojekt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import proj.mainfiles.fajnyprojekt.data.Student;
 import proj.mainfiles.fajnyprojekt.service.StudentService;
@@ -23,7 +24,12 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(UUID id){
-        return studentService.getStudentById(id);
+    public ResponseEntity<Student> getStudentById(@PathVariable UUID id){
+        var student = studentService.getStudentById(id);
+        if(student != null){
+            return ResponseEntity.ok(student);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
