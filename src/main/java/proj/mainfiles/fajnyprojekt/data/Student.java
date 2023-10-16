@@ -1,7 +1,7 @@
 package proj.mainfiles.fajnyprojekt.data;
 
-public class Student {
+import java.util.UUID;
 
-    private boolean piwo;
+public record Student (UUID id, String name) {
 
 }
